@@ -189,8 +189,8 @@
                                 <generateApiDocumentation>true</generateApiDocumentation>
                                 <generateModelDocumentation>true</generateModelDocumentation>
                                 <configOptions>
-                                    <delegatePattern>true</delegatePattern>
-                                    <configPackage>${project-base-package}.swagger</configPackage>
+                                    <delegatePattern>false</delegatePattern>
+                                    <configPackage>com.skyhigh.vehiclechain.config.swagger</configPackage>
                                 </configOptions>
                             </configuration>
                         </execution>
