@@ -5,7 +5,7 @@
  */
 package com.skyhigh.vehiclechain.controller;
 
-import com.skyhigh.vehiclechain.model.User;
+import com.skyhigh.vehiclechain.model.dto.UserDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -58,7 +58,7 @@ public interface UserApi {
         value = "/user"
     )
     default ResponseEntity<Void> createUser(
-        @Parameter(name = "body", description = "Created user object", required = true) @Valid @RequestBody User body
+        @Parameter(name = "body", description = "Created user object", required = true) @Valid @RequestBody UserDto body
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
@@ -109,7 +109,7 @@ public interface UserApi {
         tags = { "user" },
         responses = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
             }),
             @ApiResponse(responseCode = "404", description = "User not found")
         }
@@ -119,7 +119,7 @@ public interface UserApi {
         value = "/user/{email}",
         produces = { "application/json" }
     )
-    default ResponseEntity<User> getUserByName(
+    default ResponseEntity<UserDto> getUserByName(
         @Parameter(name = "email", description = "The name that needs to be fetched. Use user1 for testing. ", required = true) @PathVariable("email") String email
     ) {
         getRequest().ifPresent(request -> {
@@ -152,7 +152,7 @@ public interface UserApi {
         tags = { "user" },
         responses = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Invalid user supplied"),
             @ApiResponse(responseCode = "404", description = "User not found")
@@ -163,9 +163,9 @@ public interface UserApi {
         value = "/user/{email}",
         produces = { "application/json" }
     )
-    default ResponseEntity<User> updateUser(
+    default ResponseEntity<UserDto> updateUser(
         @Parameter(name = "email", description = "name that need to be updated", required = true) @PathVariable("email") String email,
-        @Parameter(name = "body", description = "Updated user object", required = true) @Valid @RequestBody User body
+        @Parameter(name = "body", description = "Updated user object", required = true) @Valid @RequestBody UserDto body
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {

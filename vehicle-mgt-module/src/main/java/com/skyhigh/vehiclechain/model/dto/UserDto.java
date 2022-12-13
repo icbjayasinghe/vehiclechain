@@ -1,37 +1,18 @@
-package com.skyhigh.vehiclechain.model;
+package com.skyhigh.vehiclechain.model.dto;
 
-import java.net.URI;
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-
-import java.util.*;
 import javax.annotation.Generated;
+import java.util.Objects;
 
 /**
  * User
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-29T17:49:46.664543+05:30[Asia/Colombo]")
-@Entity
-@Table(name = "User")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
-public class User {
+public class UserDto {
 
-  @Id
   @JsonProperty("id")
   private String id;
 
@@ -50,17 +31,7 @@ public class User {
   @JsonProperty("userStatus")
   private Integer userStatus;
 
-  @Column(name = "created_date", nullable = false, updatable = false)
-  @Temporal(TemporalType.TIMESTAMP)
-  @CreatedDate
-  private Date createdAt;
-
-  @Column(name = "modified_date")
-  @Temporal(TemporalType.TIMESTAMP)
-  @LastModifiedDate
-  private Date modifiedDate;
-
-  public User id(String id) {
+  public UserDto id(String id) {
     this.id = id;
     return this;
   }
@@ -79,7 +50,7 @@ public class User {
     this.id = id;
   }
 
-  public User firstName(String firstName) {
+  public UserDto firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -98,7 +69,7 @@ public class User {
     this.firstName = firstName;
   }
 
-  public User lastName(String lastName) {
+  public UserDto lastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
@@ -117,7 +88,7 @@ public class User {
     this.lastName = lastName;
   }
 
-  public User email(String email) {
+  public UserDto email(String email) {
     this.email = email;
     return this;
   }
@@ -136,7 +107,7 @@ public class User {
     this.email = email;
   }
 
-  public User phone(String phone) {
+  public UserDto phone(String phone) {
     this.phone = phone;
     return this;
   }
@@ -155,7 +126,7 @@ public class User {
     this.phone = phone;
   }
 
-  public User userStatus(Integer userStatus) {
+  public UserDto userStatus(Integer userStatus) {
     this.userStatus = userStatus;
     return this;
   }
@@ -182,7 +153,7 @@ public class User {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    User user = (User) o;
+    UserDto user = (UserDto) o;
     return Objects.equals(this.id, user.id) &&
         Objects.equals(this.firstName, user.firstName) &&
         Objects.equals(this.lastName, user.lastName) &&
