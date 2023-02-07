@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-12-01T22:13:59.065667+05:30[Asia/Colombo]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-02-05T12:55:01.298053+05:30[Asia/Colombo]")
 @Validated
 @Tag(name = "user", description = "Operations about user")
 public interface UserApi {
@@ -50,16 +50,28 @@ public interface UserApi {
         summary = "Create user",
         tags = { "user" },
         responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation")
+            @ApiResponse(responseCode = "200", description = "successful operation", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
+            })
         }
     )
     @RequestMapping(
         method = RequestMethod.POST,
-        value = "/user"
+        value = "/user",
+        produces = { "application/json" }
     )
-    default ResponseEntity<Void> createUser(
+    default ResponseEntity<UserDto> createUser(
         @Parameter(name = "body", description = "Created user object", required = true) @Valid @RequestBody UserDto body
     ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"firstName\" : \"firstName\", \"lastName\" : \"lastName\", \"userStatus\" : 0, \"phone\" : \"phone\", \"id\" : \"id\", \"email\" : \"email\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

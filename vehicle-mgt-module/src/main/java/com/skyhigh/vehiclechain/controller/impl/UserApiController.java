@@ -4,6 +4,8 @@ import com.skyhigh.vehiclechain.controller.UserApi;
 import com.skyhigh.vehiclechain.model.User;
 
 
+import com.skyhigh.vehiclechain.model.dto.UserDto;
+import com.skyhigh.vehiclechain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,9 +36,12 @@ public class UserApiController implements UserApi {
 
     private final NativeWebRequest request;
 
+    private UserService userService;
+
     @Autowired
-    public UserApiController(NativeWebRequest request) {
+    public UserApiController(NativeWebRequest request, UserService userService) {
         this.request = request;
+        this.userService = userService;
     }
 
     @Override
@@ -44,4 +49,9 @@ public class UserApiController implements UserApi {
         return Optional.ofNullable(request);
     }
 
+    @Override
+    public ResponseEntity<UserDto> createUser(UserDto body) {
+        UserDto userDto = userService.createUser(body);
+        return ResponseEntity.ok(userDto);
+    }
 }

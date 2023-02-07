@@ -1,16 +1,19 @@
 package com.skyhigh.vehiclechain.model.dto;
 
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 import javax.annotation.Generated;
-import java.util.Objects;
 
 /**
- * User
+ * UserDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-29T17:49:46.664543+05:30[Asia/Colombo]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-02-05T12:55:01.298053+05:30[Asia/Colombo]")
+@Builder
 public class UserDto {
 
   @JsonProperty("id")
@@ -40,7 +43,7 @@ public class UserDto {
    * Get id
    * @return id
   */
-  
+
   @Schema(name = "id", required = false)
   public String getId() {
     return id;
@@ -59,7 +62,7 @@ public class UserDto {
    * Get firstName
    * @return firstName
   */
-  
+
   @Schema(name = "firstName", required = false)
   public String getFirstName() {
     return firstName;
@@ -78,7 +81,7 @@ public class UserDto {
    * Get lastName
    * @return lastName
   */
-  
+
   @Schema(name = "lastName", required = false)
   public String getLastName() {
     return lastName;
@@ -97,7 +100,7 @@ public class UserDto {
    * Get email
    * @return email
   */
-  
+
   @Schema(name = "email", required = false)
   public String getEmail() {
     return email;
@@ -116,7 +119,7 @@ public class UserDto {
    * Get phone
    * @return phone
   */
-  
+
   @Schema(name = "phone", required = false)
   public String getPhone() {
     return phone;
@@ -135,7 +138,7 @@ public class UserDto {
    * User Status
    * @return userStatus
   */
-  
+
   @Schema(name = "userStatus", description = "User Status", required = false)
   public Integer getUserStatus() {
     return userStatus;
@@ -153,13 +156,13 @@ public class UserDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserDto user = (UserDto) o;
-    return Objects.equals(this.id, user.id) &&
-        Objects.equals(this.firstName, user.firstName) &&
-        Objects.equals(this.lastName, user.lastName) &&
-        Objects.equals(this.email, user.email) &&
-        Objects.equals(this.phone, user.phone) &&
-        Objects.equals(this.userStatus, user.userStatus);
+    UserDto userDto = (UserDto) o;
+    return Objects.equals(this.id, userDto.id) &&
+        Objects.equals(this.firstName, userDto.firstName) &&
+        Objects.equals(this.lastName, userDto.lastName) &&
+        Objects.equals(this.email, userDto.email) &&
+        Objects.equals(this.phone, userDto.phone) &&
+        Objects.equals(this.userStatus, userDto.userStatus);
   }
 
   @Override
@@ -170,7 +173,7 @@ public class UserDto {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class User {\n");
+    sb.append("class UserDto {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");

@@ -1,16 +1,12 @@
 package com.skyhigh.vehiclechain.model;
 
-import java.net.URI;
+import java.io.Serializable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.time.OffsetDateTime;
+import lombok.*;
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -25,11 +21,26 @@ import javax.annotation.Generated;
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-11-29T17:49:46.664543+05:30[Asia/Colombo]")
+@Builder
 @Entity
 @Table(name = "User")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
-public class User {
+public class User implements Serializable {
+
+  public User() {
+  }
+
+  public User(String id, String firstName, String lastName, String email, String phone, Integer userStatus, Date createdAt, Date modifiedDate) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.phone = phone;
+    this.userStatus = userStatus;
+    this.createdAt = createdAt;
+    this.modifiedDate = modifiedDate;
+  }
 
   @Id
   @JsonProperty("id")
@@ -69,7 +80,7 @@ public class User {
    * Get id
    * @return id
   */
-  
+
   @Schema(name = "id", required = false)
   public String getId() {
     return id;
@@ -88,7 +99,7 @@ public class User {
    * Get firstName
    * @return firstName
   */
-  
+
   @Schema(name = "firstName", required = false)
   public String getFirstName() {
     return firstName;
@@ -107,7 +118,7 @@ public class User {
    * Get lastName
    * @return lastName
   */
-  
+
   @Schema(name = "lastName", required = false)
   public String getLastName() {
     return lastName;
@@ -126,7 +137,7 @@ public class User {
    * Get email
    * @return email
   */
-  
+
   @Schema(name = "email", required = false)
   public String getEmail() {
     return email;
@@ -145,7 +156,7 @@ public class User {
    * Get phone
    * @return phone
   */
-  
+
   @Schema(name = "phone", required = false)
   public String getPhone() {
     return phone;
@@ -164,7 +175,7 @@ public class User {
    * User Status
    * @return userStatus
   */
-  
+
   @Schema(name = "userStatus", description = "User Status", required = false)
   public Integer getUserStatus() {
     return userStatus;
@@ -220,5 +231,8 @@ public class User {
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+//  public User() {
+//  }
 }
 
