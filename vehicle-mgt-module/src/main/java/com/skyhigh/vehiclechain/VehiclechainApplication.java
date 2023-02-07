@@ -8,7 +8,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.skyhigh.vehiclechain.swagger", "com.skyhigh.vehiclechain.controller" , "com.skyhigh.vehiclechain.config.swagger"})
+@ComponentScan(basePackages = {"com.skyhigh.vehiclechain.swagger",
+        "com.skyhigh.vehiclechain.controller" ,
+        "com.skyhigh.vehiclechain.config.swagger",
+        "com.skyhigh.vehiclechain.service",
+        "com.skyhigh.vehiclechain.repository",
+        "com.skyhigh.vehiclechain.util"})
 public class VehiclechainApplication {
 
     public static void main(String[] args) {
