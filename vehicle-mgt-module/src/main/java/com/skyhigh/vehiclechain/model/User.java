@@ -15,6 +15,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.*;
 import javax.annotation.Generated;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * User
@@ -52,6 +54,8 @@ public class User implements Serializable {
   @JsonProperty("lastName")
   private String lastName;
 
+  @Column(unique=true, nullable = false)
+  @NotEmpty
   @JsonProperty("email")
   private String email;
 
