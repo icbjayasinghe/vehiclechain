@@ -13,7 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
         "com.skyhigh.vehiclechain.config.swagger",
         "com.skyhigh.vehiclechain.service",
         "com.skyhigh.vehiclechain.repository",
-        "com.skyhigh.vehiclechain.util"})
+        "com.skyhigh.vehiclechain.util",
+        "com.skyhigh.vehiclechain.exception"})
 public class VehiclechainApplication {
 
     public static void main(String[] args) {
