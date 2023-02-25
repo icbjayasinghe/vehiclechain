@@ -42,7 +42,7 @@ public class UserApiController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<UserDto> getUserByName(String email) {
+    public ResponseEntity<UserDto> getUserByEmail(String email) {
         UserDto userDto = userService.getUser(email);
         if (userDto == null) {
             throw new ResourceNotFoundException("User with email :"+email+" Not Found!");

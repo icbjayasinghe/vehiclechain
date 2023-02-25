@@ -16,7 +16,12 @@ tags:
   - name: user
     description: Operations about user
     externalDocs:
-      description: Find out more about our store
+      description: Find out more about our user
+      url: http://swagger.io
+  - name: vehicle
+    description: Operations about vehicles
+    externalDocs:
+      description: Find out more about our vehicle
       url: http://swagger.io
 paths:
   /user:
@@ -46,7 +51,7 @@ paths:
       tags:
         - user
       summary: Get user by user name
-      operationId: getUserByName
+      operationId: getUserByEmail
       parameters:
         - name: email
           in: path
@@ -73,7 +78,7 @@ paths:
       parameters:
         - name: email
           in: path
-          description: name that need to be updated
+          description: email that need to be updated
           required: true
           schema:
             type: string
@@ -121,6 +126,110 @@ paths:
         404:
           description: User not found
           content: {}
+
+  /vehicle:
+    post:
+      tags:
+        - vehicle
+      summary: Create vehicle
+      description: Create vehicle functionality
+      operationId: createVehicle
+      requestBody:
+        description: Created vehicle object
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/VehicleDto'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleDto'
+      x-codegen-request-body-name: body
+  /vehicle/{vin}:
+    get:
+      tags:
+        - vehicle
+      summary: Get vehicle by vin
+      operationId: getVehicleByVin
+      parameters:
+        - name: vin
+          in: path
+          description: 'The vin that needs to be fetched.'
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleDto'
+        404:
+          description: Vehicle not found
+          content: {}
+    put:
+      tags:
+        - vehicle
+      summary: Updated vehicle
+      description: This can only be done by the logged in user.
+      operationId: updateVehicle
+      parameters:
+        - name: vin
+          in: path
+          description: name that need to be updated
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated vehicle object
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/VehicleDto'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleDto'
+        400:
+          description: Invalid vehicle supplied
+          content: {}
+        404:
+          description: User not found
+          content: {}
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+        - user
+      summary: Delete vehicle
+      description: This can only be done by the logged in user.
+      operationId: deleteVehicle
+      parameters:
+        - name: vin
+          in: path
+          description: The name that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: operation successful
+          content: {}
+        400:
+          description: Invalid vin supplied
+          content: {}
+        404:
+          description: Vehicle not found
+          content: {}
+
 components:
   schemas:
     UserDto:
@@ -140,6 +249,58 @@ components:
           type: integer
           description: User Status
           format: int32
+    VehicleDto:
+      type: object
+      properties:
+        id:
+          type: string
+        vin:
+          type: string
+        cNumber:
+          type: string
+        vehicleNumber:
+          type: string
+        brand:
+          type: string
+          example: Toyota
+        model:
+          type: string
+          example: Corolla
+        type:
+          type: string
+          description: Vehicle Status
+          example: approved
+          enum:
+            - car
+            - van
+            - suv/jeep
+            - crew cab
+            - pick-up/double-cab
+            - bus
+            - lorry/tipper
+            - three wheel
+            - tractor
+            - heavy-duty
+            - motorcycle
+            - bicycle
+            - other
+        currentOwner:
+          $ref: '#/components/schemas/UserDto'
+        prevOwners:
+          type: array
+          xml:
+            name: users
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/UserDto'
+        status:
+          type: string
+          description: Vehicle Status
+          example: approved
+          enum:
+            - unapproved
+            - approved
+            - deactive
   securitySchemes:
     reflectoring_auth:
       type: oauth2

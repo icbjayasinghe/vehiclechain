@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-02-05T12:55:01.298053+05:30[Asia/Colombo]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-02-24T19:13:36.612862+05:30[Asia/Colombo]")
 @Validated
 @Tag(name = "user", description = "Operations about user")
 public interface UserApi {
@@ -46,22 +46,22 @@ public interface UserApi {
      * @return successful operation (status code 200)
      */
     @Operation(
-        operationId = "createUser",
-        summary = "Create user",
-        tags = { "user" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
-            })
-        }
+            operationId = "createUser",
+            summary = "Create user",
+            tags = { "user" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
+                    })
+            }
     )
     @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/user",
-        produces = { "application/json" }
+            method = RequestMethod.POST,
+            value = "/user",
+            produces = { "application/json" }
     )
     default ResponseEntity<UserDto> createUser(
-        @Parameter(name = "body", description = "Created user object", required = true) @Valid @RequestBody UserDto body
+            @Parameter(name = "body", description = "Created user object", required = true) @Valid @RequestBody UserDto body
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -87,21 +87,21 @@ public interface UserApi {
      *         or User not found (status code 404)
      */
     @Operation(
-        operationId = "deleteUser",
-        summary = "Delete user",
-        tags = { "user" },
-        responses = {
-            @ApiResponse(responseCode = "201", description = "operation successful"),
-            @ApiResponse(responseCode = "400", description = "Invalid username supplied"),
-            @ApiResponse(responseCode = "404", description = "User not found")
-        }
+            operationId = "deleteUser",
+            summary = "Delete user",
+            tags = { "user" },
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "operation successful"),
+                    @ApiResponse(responseCode = "400", description = "Invalid username supplied"),
+                    @ApiResponse(responseCode = "404", description = "User not found")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/user/{email}"
+            method = RequestMethod.DELETE,
+            value = "/user/{email}"
     )
     default ResponseEntity<Void> deleteUser(
-        @Parameter(name = "email", description = "The name that needs to be deleted", required = true) @PathVariable("email") String email
+            @Parameter(name = "email", description = "The name that needs to be deleted", required = true) @PathVariable("email") String email
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
@@ -116,23 +116,23 @@ public interface UserApi {
      *         or User not found (status code 404)
      */
     @Operation(
-        operationId = "getUserByName",
-        summary = "Get user by user name",
-        tags = { "user" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
-            }),
-            @ApiResponse(responseCode = "404", description = "User not found")
-        }
+            operationId = "getUserByEmail",
+            summary = "Get user by user name",
+            tags = { "user" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
+                    }),
+                    @ApiResponse(responseCode = "404", description = "User not found")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/user/{email}",
-        produces = { "application/json" }
+            method = RequestMethod.GET,
+            value = "/user/{email}",
+            produces = { "application/json" }
     )
-    default ResponseEntity<UserDto> getUserByName(
-        @Parameter(name = "email", description = "The name that needs to be fetched. Use user1 for testing. ", required = true) @PathVariable("email") String email
+    default ResponseEntity<UserDto> getUserByEmail(
+            @Parameter(name = "email", description = "The name that needs to be fetched. Use user1 for testing. ", required = true) @PathVariable("email") String email
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -152,32 +152,32 @@ public interface UserApi {
      * PUT /user/{email} : Updated user
      * This can only be done by the logged in user.
      *
-     * @param email name that need to be updated (required)
+     * @param email email that need to be updated (required)
      * @param body Updated user object (required)
      * @return successful operation (status code 200)
      *         or Invalid user supplied (status code 400)
      *         or User not found (status code 404)
      */
     @Operation(
-        operationId = "updateUser",
-        summary = "Updated user",
-        tags = { "user" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Invalid user supplied"),
-            @ApiResponse(responseCode = "404", description = "User not found")
-        }
+            operationId = "updateUser",
+            summary = "Updated user",
+            tags = { "user" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Invalid user supplied"),
+                    @ApiResponse(responseCode = "404", description = "User not found")
+            }
     )
     @RequestMapping(
-        method = RequestMethod.PUT,
-        value = "/user/{email}",
-        produces = { "application/json" }
+            method = RequestMethod.PUT,
+            value = "/user/{email}",
+            produces = { "application/json" }
     )
     default ResponseEntity<UserDto> updateUser(
-        @Parameter(name = "email", description = "name that need to be updated", required = true) @PathVariable("email") String email,
-        @Parameter(name = "body", description = "Updated user object", required = true) @Valid @RequestBody UserDto body
+            @Parameter(name = "email", description = "email that need to be updated", required = true) @PathVariable("email") String email,
+            @Parameter(name = "body", description = "Updated user object", required = true) @Valid @RequestBody UserDto body
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
